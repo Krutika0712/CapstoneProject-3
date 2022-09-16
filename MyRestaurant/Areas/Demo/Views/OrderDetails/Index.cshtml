@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MyRestaurant.Models.OrderDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+<h1 style="color:red;">Order Details</h1>
+
+
+<style>
+table, th, td {
+  border: 3px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color:darkgray;
+
+}
+body{
+        
+        background-image:url('https://i.pinimg.com/736x/09/8f/be/098fbe40a8db0ab7c47a0c62986fdc74.jpg');
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-size:100%;
+          }
+</style>
+<div class="card-columns">
+    @foreach (var book in Model) {
+        int a= @book.MenuItem.MenuPrice;
+        int b = @book.Quantity;
+        int Total = a * b;
+        <div class="card" >
+            <div class="card-header">
+               @Html.DisplayNameFor(modelItem => book.CustomerName):- @book.CustomerName
+            </div>
+            <div class="card-body card bg-primary text-white">
+                   @Html.DisplayNameFor(modelItem => book.MenuItem.MenuItemName) :- @book.MenuItem.MenuItemName
+                                   
+                <br/>
+                 @Html.DisplayNameFor(modelItem => book.OrderDateTime) :- @book.OrderDateTime                 
+                   <br/>
+                   @Html.DisplayNameFor(modelItem => book.Quantity) :- @book.Quantity
+                   <br/>
+                  @Html.DisplayNameFor(modelItem => book.MenuItem.MenuPrice)  :- @book.MenuItem.MenuPrice
+                    <br/>
+                  @Html.DisplayNameFor(modelItem => @Total)  :- @Total
+                    
+            </div>
+            <div class="card-footer">
+               
+                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@book.CustomerId">Details</a> 
+                 |
+                <a class="btn btn-sm btn-primary"  asp-action="Delete" asp-route-id="@book.CustomerId">Delete</a>
+            </div>
+        </div>
+    }
+</div>
+<a class="btn btn-sm btn-danger" asp-area="Demo" asp-controller="MenuItems" asp-action="Index">List of Menu Items</a>
+ <a class="btn btn-sm btn-danger text-white" asp-area="" asp-page="/Index">Back To Home</a>

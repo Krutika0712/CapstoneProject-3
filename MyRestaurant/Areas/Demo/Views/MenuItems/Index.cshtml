@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MyRestaurant.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Menu Items</h1>
+
+
+
+
+<p>
+    <a class="btn btn-sm btn-danger" asp-action="Create">Create New Menu Item</a>
+</p>
+
+<style>
+table, th, td {
+  border: 3px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color:cornsilk;
+}
+body{
+        
+        background-image:url('https://images.pexels.com/photos/349610/pexels-photo-349610.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-size:100%;
+          }
+</style>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.MenuItemId">Edit</a> 
+                |
+                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.MenuItemId">Details</a> 
+                |
+                <a  class="btn btn-sm btn-primary" asp-action="Delete" asp-route-id="@item.MenuItemId">Delete</a>
+               
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a class="btn btn-sm btn-warning btn-outline-danger" asp-area="Demo" asp-controller="Categories" asp-action="Index">List of Categories</a>
+<a class="btn btn-sm btn-danger text-white" asp-area="" asp-page="/Index">Back To Home</a>
